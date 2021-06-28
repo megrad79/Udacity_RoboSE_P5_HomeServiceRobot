@@ -1,0 +1,31 @@
+# pack-refs with: peeled fully-peeled 
+4f1efd5cc19424cdc9ada438228594c81c37bea6 refs/heads/app_manager
+86b9ecc7849b3df16be055b86cad760bee500fe7 refs/heads/experimental
+73a361bf9b39781aa40e2bd27f3fae5689373239 refs/heads/groovy
+35e8e8c19365d17c376fe3d6accc3d64f524eed5 refs/heads/hydro
+9b9a4966dd17c33b5802f3168a98c87e02b23106 refs/heads/hydro-devel
+c5806a922d6b3d60d6e82a22a12da94978940c23 refs/heads/indigo
+beae4b3cdf806fe82ab75fd933189c67e89ed8b0 refs/heads/melodic
+3ad6d46c191b457f9bd54b43d2cbdfd0caf88972 refs/tags/1.9.0
+73a361bf9b39781aa40e2bd27f3fae5689373239 refs/tags/1.9.1
+2cdd23e67b542ab84dabe5f27c8c7b3eb12f5b67 refs/tags/2.0.0
+^30178f9d3d178beda64f5c2275c88b7ca8dc7282
+5906d50ffcbe5ce6760454607384682506571b96 refs/tags/2.1.0
+d6847f2301884501ad670c3d22203ee187072e7b refs/tags/2.1.1
+0e3bf74538e489717842a3c187bcaa225f651cdf refs/tags/2.2.0
+dbb69ee022884e8406bcf00a43ece812cb330546 refs/tags/2.2.1
+5e56b235e4fb3c8a8277d388194c4e3346901bd3 refs/tags/2.2.2
+f0fce8337d1b7296c4d5b03e44af75fd1de5a2ef refs/tags/2.2.3
+054e11b59bc79225ab2a69fb95c92507bfca3119 refs/tags/diamondback
+98ff03af04ddc9c909d67e118eb064afd1280cc9 refs/tags/electric
+53b13e069d9f05fe33f3915acf9f8cfc3b1f5a15 refs/tags/fuerte
+90dac2e4aeb2482cf52f0d9c7487d0717f96fc35 refs/tags/turtlebot_simulator-0.1.0
+29a935255a15624ae5b28145bc1a415ec0a2776c refs/tags/turtlebot_simulator-0.1.1
+275cace00005edd650bf169d870cb9e40beeb71e refs/tags/turtlebot_simulator-0.1.13
+a74cfba0d37a1244ac0a42bc5e1970eab3081248 refs/tags/turtlebot_simulator-0.1.14
+408cac3ea082d7e644dde35d20a5d31fa8ed86fa refs/tags/turtlebot_simulator-0.1.2
+35d087a8a484e03fc8f89ec58d30f702b888e7b4 refs/tags/turtlebot_simulator-0.9.0
+729952a00fc86122e1445004efe157c5fae92bf7 refs/tags/turtlebot_simulator-0.9.1
+a22c60eadc78296ec35dca39fa8f187c302c2851 refs/tags/turtlebot_simulator-1.0.0
+ca0693919c1cf938ff42ee157d72a06bee207063 refs/tags/turtlebot_simulator-1.0.1
+cf465ce5385b3b1147607a23beacadfdbaf6e257 refs/tags/unstable
