@@ -1,6 +1,0 @@
-# pack-refs with: peeled fully-peeled 
-5e9d19c56e893e88af16690124c262976eec6fcd refs/heads/indigo
-4bd7fc86e197a9a7e1b5e2fe3734a042652f14fc refs/heads/interactive_marker_rapp
-4c4620ec83658979810b9c5a4ace7ca3755277f0 refs/tags/2.2.2
-f8654758bf5c8e1ca38c742f0496147a65f02724 refs/tags/2.3.0
-5e9d19c56e893e88af16690124c262976eec6fcd refs/tags/2.3.1
