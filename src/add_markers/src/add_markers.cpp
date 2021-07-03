@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include <nav_msgs/Odometry.h>
 
 int main( int argc, char** argv )
 {
@@ -14,6 +15,9 @@ int main( int argc, char** argv )
   
   // Create publishers that can publish visualization_msgs::Marker on visualization_marker
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  
+  // Create subscribers
+  ros::Subscriber odom_sub = n.subscribe("odom", 1, nav_msgs::Odometry, msg);
 
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
@@ -96,12 +100,6 @@ int main( int argc, char** argv )
     
     // Publish marker at goal 2
     marker_pub.publish(marker);
-
-// ----------------------------------------
-//Initially show the marker at the pickup zone
-// Hide the marker once your robot reaches the pickup zone
-// Wait 5 seconds to simulate a pickup
-// Show the marker at the drop off zone once your robot reaches it
 
     r.sleep();
   }
