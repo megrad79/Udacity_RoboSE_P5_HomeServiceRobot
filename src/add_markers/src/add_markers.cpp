@@ -2,22 +2,35 @@
 #include <visualization_msgs/Marker.h>
 #include <nav_msgs/Odometry.h>
 
+void callback(const nav_msgs::Odometry::ConstPtr& msg)
+{
+  visualization_msgs::Marker pose;
+  
+  // funcion???
+  double x = msg->pose.x;
+  double y = msg->pose.y;
+  
+  if (x = -1 && y = -2){
+    marker.action = visualization_msgs::Marker::ADD;
+    marker_pub.publish(pose);
+  }
+  else if (x = -3 && y = -2){
+    marker.action = visualization_msgs::Marker::ADD;
+    marker_pub.publish(pose);
+  }
+  else{
+    marker.action = visualization_msgs::Marker::DELETE;
+    marker_pub.publish(pose);
+  }  
+}
+
 int main( int argc, char** argv )
 {
-  // Initialize add_markers
-  ros::init(argc, argv, "add_markers");
-  
-  // Create handle
-  ros::NodeHandle n;
-  
-  // Set rate
-  ros::Rate r(1);
-  
-  // Create publishers that can publish visualization_msgs::Marker on visualization_marker
-  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  
-  // Create subscribers
-  ros::Subscriber odom_sub = n.subscribe("odom", 1, nav_msgs::Odometry::ConstPtr& msg);
+  ros::init(argc, argv, "add_markers");   // Initialize add_markers
+  ros::NodeHandle n;   // Create handle  
+  ros::Rate r(1);   // Set rate
+  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);   // Create publishers that can publish visualization_msgs::Marker on visualization_marker  
+  ros::Subscriber odom_sub = n.subscribe("odom", 1, callback);   // Create subscribers
   
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
@@ -101,6 +114,8 @@ int main( int argc, char** argv )
     // Publish marker at goal 2
     marker_pub.publish(marker);
 
+    ros::spin();
+    
     r.sleep();
   }
 }
