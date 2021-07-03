@@ -9,10 +9,10 @@ Once the catkin workspace is built and, the follow packages are cloned from gith
 - https://github.com/ros-perception/slam_gmapping
 
 Source the package then intall the following using rosdep:
-turtlebot_teleop
-turtlebot_rviz_launchers
-turtlebot_gazebo
-gmapping
+- turtlebot_teleop: which helps you manually naviagte the robot through the space
+- turtlebot_rviz_launchers: which allows you to visualize various sensors and planning algorithms as the robot navigates the space
+- turtlebot_gazebo: which launches gazebo and spawns the robot in the gazebo world
+- gmapping: allows autonomous naviation/ SLAM in the world
 
 Run catking_make and source the package again, then you are ready to begin making your shell scripts which will allow you to run multiple terminals at once with various goals.
 
