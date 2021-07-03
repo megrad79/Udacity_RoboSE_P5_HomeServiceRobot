@@ -17,8 +17,8 @@ int main( int argc, char** argv )
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
   
   // Create subscribers
-  ros::Subscriber odom_sub = n.subscribe("odom", 1, nav_msgs::Odometry, msg);
-
+  ros::Subscriber odom_sub = n.subscribe("odom", 1, nav_msgs::Odometry::ConstPtr& msg);
+  
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
 
