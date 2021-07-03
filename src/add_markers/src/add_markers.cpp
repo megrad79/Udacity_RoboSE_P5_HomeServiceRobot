@@ -3,9 +3,16 @@
 
 int main( int argc, char** argv )
 {
+  // Initialize add_markers
   ros::init(argc, argv, "add_markers");
+  
+  // Create handle
   ros::NodeHandle n;
+  
+  // Set rate
   ros::Rate r(1);
+  
+  // Create publishers that can publish visualization_msgs::Marker on visualization_marker
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   // Set our initial shape type to be a cube
@@ -29,7 +36,7 @@ int main( int argc, char** argv )
     // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
     marker.action = visualization_msgs::Marker::ADD;
 
-    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
+    // Set the pose of the marker to goal 1.  This is a full 6DOF pose relative to the frame/time specified in the header
     marker.pose.position.x = -3;
     marker.pose.position.y = -1;
     marker.pose.position.z = 0;
@@ -51,7 +58,7 @@ int main( int argc, char** argv )
 
     marker.lifetime = ros::Duration();
 
-    // Publish the marker at pickup zone
+    // Publish the marker at goal 1
     while (marker_pub.getNumSubscribers() < 1)
     {
       if (!ros::ok())
@@ -59,34 +66,35 @@ int main( int argc, char** argv )
         return 0;
       }
       ROS_WARN_ONCE("Please create a subscriber to the marker");
-      sleep(5);
+      sleep(1);
     }
     marker_pub.publish(marker);
+    
+    // Wait 5 secs
+    ros::Duration(5).sleep();    
+    
+    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+    marker.action = visualization_msgs::Marker::DELETE;
 
-    // Hide the marker
-    while (marker_pub.getNumSubscribers() > 1)
-    {
-      if (!ros::ok())
-      {
-        // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
-        marker.action = visualization_msgs::Marker::DELETE;
-        return 0;
-      }
-      ROS_WARN_ONCE("Marker obtained from pickup zone");
-      sleep(5);
-    }
+    // Hide marker
     marker_pub.publish(marker);
-
-     // Publish the marker at dropoff zone
-    while (marker_pub.getNumSubscribers() < 1)
-    {
-      if (!ros::ok())
-      {
-        return 0;
-      }
-      ROS_WARN_ONCE("Marker delivered to dropoff zone");
-      sleep(5);
-    }
+    
+    // Wait 5 secs
+    ros::Duration(5).sleep();   
+    
+    // Set the pose of the marker to goal 2.
+    marker.pose.position.x = 1;
+    marker.pose.position.y = 1;
+    marker.pose.position.z = 0;
+    marker.pose.orientation.x = 0.0;
+    marker.pose.orientation.y = 0.0;
+    marker.pose.orientation.z = 0.0;
+    marker.pose.orientation.w = 1.0;
+    
+    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+    marker.action = visualization_msgs::Marker::ADD;
+    
+    // Publish marker at goal 2
     marker_pub.publish(marker);
 
 // ----------------------------------------
@@ -94,8 +102,6 @@ int main( int argc, char** argv )
 // Hide the marker once your robot reaches the pickup zone
 // Wait 5 seconds to simulate a pickup
 // Show the marker at the drop off zone once your robot reaches it
-
-
 
     r.sleep();
   }
