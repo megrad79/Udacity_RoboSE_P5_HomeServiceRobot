@@ -2,26 +2,26 @@
 #include <visualization_msgs/Marker.h>
 #include <nav_msgs/Odometry.h>
 
+bool pickUpZone = false;
+bool dropOffZone = false;
+
 void callback(const nav_msgs::Odometry::ConstPtr& msg)
 {
   visualization_msgs::Marker pose;
   
-  // funcion???
-  double x = msg->pose.x;
-  double y = msg->pose.y;
+  // function
+  double x = msg->pose.pose.position.x;
+  double y = msg->pose.pose.position.y;
   
-  if (x = -1 && y = -2){
-    marker.action = visualization_msgs::Marker::ADD;
-    marker_pub.publish(pose);
+  if (x == -1.5 && y == -1){
+    pickUpZone = true;
   }
-  else if (x = -3 && y = -2){
-    marker.action = visualization_msgs::Marker::ADD;
-    marker_pub.publish(pose);
+  else if (x == -3 && y == -2){
+    dropOffZone=true;
   }
   else{
-    marker.action = visualization_msgs::Marker::DELETE;
-    marker_pub.publish(pose);
-  }  
+  }
+  
 }
 
 int main( int argc, char** argv )
@@ -54,8 +54,8 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker to goal 1.  This is a full 6DOF pose relative to the frame/time specified in the header
-    marker.pose.position.x = -1;
-    marker.pose.position.y = -2;
+    marker.pose.position.x = -1.5;
+    marker.pose.position.y = -1;
     marker.pose.position.z = 0;
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;
@@ -85,36 +85,41 @@ int main( int argc, char** argv )
       ROS_WARN_ONCE("Please create a subscriber to the marker");
       sleep(1);
     }
-    marker_pub.publish(marker);
-    
-    // Wait 5 secs
-    ros::Duration(5).sleep();    
-    
-    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
-    marker.action = visualization_msgs::Marker::DELETE;
 
-    // Hide marker
-    marker_pub.publish(marker);
-    
-    // Wait 5 secs
-    ros::Duration(5).sleep();   
-    
-    // Set the pose of the marker to goal 2.
-    marker.pose.position.x = -3;
-    marker.pose.position.y = -2;
-    marker.pose.position.z = 0;
-    marker.pose.orientation.x = 0.0;
-    marker.pose.orientation.y = 0.0;
-    marker.pose.orientation.z = 0.0;
-    marker.pose.orientation.w = 1.0;
-    
-    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
-    marker.action = visualization_msgs::Marker::ADD;
-    
-    // Publish marker at goal 2
-    marker_pub.publish(marker);
+    if (pickUpZone == false && dropOffZone == false){
+      marker_pub.publish(marker);
+    }
+    else if (pickUpZone == true && dropOffZone == false){
+      // Wait 5 secs
+      ros::Duration(5).sleep();
+      // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+      marker.action = visualization_msgs::Marker::DELETE;
 
-    ros::spin();
+      // Hide marker
+      marker_pub.publish(marker);
+    }
+    else if (pickUpZone == false && dropOffZone == true){
+      // Wait 5 secs
+      ros::Duration(5).sleep();   
+    
+      // Set the pose of the marker to goal 2.
+      marker.pose.position.x = -3;
+      marker.pose.position.y = -2;
+      marker.pose.position.z = 0;
+      marker.pose.orientation.x = 0.0;
+      marker.pose.orientation.y = 0.0;
+      marker.pose.orientation.z = 0.0;
+      marker.pose.orientation.w = 1.0;
+    
+      // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+      marker.action = visualization_msgs::Marker::ADD;
+    
+      // Publish marker at goal 2
+      marker_pub.publish(marker);
+    }
+    else {
+      ros::spin();
+    }
     
     r.sleep();
   }
