@@ -13,10 +13,10 @@ void callback(const nav_msgs::Odometry::ConstPtr& msg)
   double x = msg->pose.pose.position.x;
   double y = msg->pose.pose.position.y;
   
-  if (x == -1.5 && y == -1){
+  if (x == 0 && y == 2){
     pickUpZone = true;
   }
-  else if (x == -3 && y == -2){
+  else if (x == -2 && y == 1){
     dropOffZone=true;
   }
   else{
@@ -54,8 +54,8 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker to goal 1.  This is a full 6DOF pose relative to the frame/time specified in the header
-    marker.pose.position.x = -1.5;
-    marker.pose.position.y = -1;
+    marker.pose.position.x = 2;
+    marker.pose.position.y = 0;
     marker.pose.position.z = 0;
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;
@@ -103,8 +103,8 @@ int main( int argc, char** argv )
       ros::Duration(5).sleep();   
     
       // Set the pose of the marker to goal 2.
-      marker.pose.position.x = -3;
-      marker.pose.position.y = -2;
+      marker.pose.position.x = 1;
+      marker.pose.position.y = 2;
       marker.pose.position.z = 0;
       marker.pose.orientation.x = 0.0;
       marker.pose.orientation.y = 0.0;
