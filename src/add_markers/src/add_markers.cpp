@@ -13,10 +13,12 @@ void callback(const nav_msgs::Odometry::ConstPtr& msg)
   double x = msg->pose.pose.position.x;
   double y = msg->pose.pose.position.y;
   
-  if (x == 0 && y == 2){
+  // goal 1 (-2,-1) >> pose(-1,2)
+  if (-1.15 <= x <= -0.85 && 1.85 <= y <= 2.15){
     pickUpZone = true;
   }
-  else if (x == -2 && y == 1){
+  // goal 2 (0,-2) >> pose(-2,-0)
+  else if (-2.15 <= x <= -1.85 && -0.15 <= y <= 0.15){
     dropOffZone=true;
   }
   else{
@@ -54,8 +56,8 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker to goal 1.  This is a full 6DOF pose relative to the frame/time specified in the header
-    marker.pose.position.x = 2;
-    marker.pose.position.y = 0;
+    marker.pose.position.x = -1;
+    marker.pose.position.y = 2;
     marker.pose.position.z = 0;
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;
@@ -75,7 +77,7 @@ int main( int argc, char** argv )
 
     marker.lifetime = ros::Duration();
 
-    // Publish the marker at goal 1
+    // Publish the marker at goal 1 (-2,-1)
     while (marker_pub.getNumSubscribers() < 1)
     {
       if (!ros::ok())
@@ -102,9 +104,9 @@ int main( int argc, char** argv )
       // Wait 5 secs
       ros::Duration(5).sleep();   
     
-      // Set the pose of the marker to goal 2.
-      marker.pose.position.x = 1;
-      marker.pose.position.y = 2;
+      // Set the pose of the marker to goal 2 (0,-2).
+      marker.pose.position.x = -2;
+      marker.pose.position.y = -0;
       marker.pose.position.z = 0;
       marker.pose.orientation.x = 0.0;
       marker.pose.orientation.y = 0.0;

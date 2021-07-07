@@ -17,11 +17,11 @@ int main(int argc, char** argv){
 
   move_base_msgs::MoveBaseGoal goal;
 
-  //we'll send a goal to the robot to move 1 meter forward
+  //we'll send a goal to the robot to move to first goal (-2,-1)
   goal.target_pose.header.frame_id = "map";
   goal.target_pose.header.stamp = ros::Time::now();
 
-  goal.target_pose.pose.position.x = 0;
+  goal.target_pose.pose.position.x = -1;
   goal.target_pose.pose.position.y = 2;
   goal.target_pose.pose.orientation.w = 1.0;
 
@@ -44,12 +44,12 @@ int main(int argc, char** argv){
   // Goal 2
   move_base_msgs::MoveBaseGoal goal2;
 
-  //we'll send a goal to the robot to move 1 meter forward
+  //we'll send a goal to the robot to move to second goal (0,-2)
   goal2.target_pose.header.frame_id = "map";
   goal2.target_pose.header.stamp = ros::Time::now();
 
   goal2.target_pose.pose.position.x = -2;
-  goal2.target_pose.pose.position.y = 1;
+  goal2.target_pose.pose.position.y = 0;
   goal2.target_pose.pose.orientation.w = 1.0;
 
   ROS_INFO("Sending goal 2");
