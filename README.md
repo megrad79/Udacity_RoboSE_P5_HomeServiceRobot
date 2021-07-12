@@ -25,9 +25,15 @@ Source the package with `source devel/setup.bash` then intall the following usin
 
 Package | Purpose
 --------|--------
-`turtlebot_teleop` | This package helps you manually naviagte the robot through the space. It will allow the `u i o j k l m , .` buttons on your keyboard to let move. To go forward, backward, left, and right, hold down on the `i , j l` keys respectively. The keys `u o m .` are diagonal movements NW, NE, SW, and SE respectively. You can tap on `q w e` buttons to increase max, linear, or angular speed by 10% respectively. Conversely, you can tap on `z x c` buttons to decrease max, linear, or angular speed by 10% respectively. The "k" key will kill all motion, whereas use of any other button not mentioned with smoothly stop motion.
-`turtlebot_rviz_launchers` | allows you to visualize various sensors and planning algorithms as the robot navigates the space
+`turtlebot_teleop` | This package helps you manually naviagte the robot through the space. It will allow the `u i o j k l m , .` buttons on your keyboard to let move. To go forward, backward, left, and right, hold down on the `i , j l` keys respectively. The keys `u o m .` are diagonal movements NW, NE, SW, and SE respectively. You can tap on `q w e` buttons to increase max, linear, or angular speed by 10% respectively. Conversely, you can tap on `z x c` buttons to decrease max, linear, or angular speed by 10% respectively. The `k` key will kill all motion, whereas use of any other button not mentioned with smoothly stop motion. **Keys must be enetered in the teleop terminal.**
+`turtlebot_rviz_launchers` | This package opens the ROS Visulaization (Rviz) applcation and allows you to visualize the project as a whole covering perception, decision-makng, and actuation. Initially Rviz is blank, but with `turtlbot_rviz_launchers` package, the Global Options, Global Status, Robot Model, TF, Laser Scan, Bumper Hit, Grid, Map, Pose Array, Camera, Map, Global Map, Local Map, AMCL Particle Swarm, and Full Plan  displays are set and mapped accoring to specificiations in shell scripts or the original turtlebot launch files. Rviz works together with all the launch files and scanners to ensure a full system is working together, when configured properly.
+
+With the correct selections on the right-hand side, the Gazebo environment will be plotted into Rviz
+
+and planning algorithms as the robot navigates the space.
+
 `turtlebot_gazebo` | launches gazebo and spawns the robot in the gazebo world
+
 `gmapping` | allows autonomous naviation/ SLAM in the world
 
 The syntax will be `rosdep -i install turtlebot_teleop`. Run `catkin_make` and `source devel/setup.bash` again, then you are ready to begin making your shell scripts which will allow you to run multiple terminals at once with various goals.
