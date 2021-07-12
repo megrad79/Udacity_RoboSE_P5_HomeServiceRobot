@@ -25,14 +25,47 @@ Source the package with `source devel/setup.bash` then install the following usi
 
 Package | Purpose
 --------|--------
-`turtlebot_teleop` | This package helps you manually navigate the robot through space. It will allow the `u i o j k l m , .` buttons on your keyboard to let you move. To go forward, backward, left, and right, hold down on the `i , j l` keys, respectively. The keys `u o m .` are diagonal movements NW, NE, SW, and SE, individually. Tap on `q w e` buttons to increase max, linear, or angular speed by 10%. Conversely, tap on `z x c` buttons to decrease max, linear, or angular speed by 10%. The `k` key will kill all motion, whereas the use of any other button not mentioned will smoothly stop motion. **Keys must be entered in the teleop terminal.**
-`turtlebot_rviz_launchers` | This package opens the ROS Visualization (Rviz) application and allows you to visualize the project as a whole, covering perception, decision-making, and actuation. Initially, Rviz is blank. With the `turtlbot_rviz_launchers` package, the Global Options, Global Status, Robot Model, TF, Laser Scan, Bumper Hit, Grid, Map, Pose Array, Camera, Map, Global Map, Local Map, AMCL Particle Swarm, and Full Plan displays are set and mapped according to specifications in shell scripts or the original turtlebot launch files. Rviz works together with all the launch files and scanners to depict that a complete system works together when appropriately configured.
-`turtlebot_gazebo` | This package launches Gazebo and spawns the turtlebot in the Gazebo world file. Gazebo is a 3D simulator that allows the creation of multidimensional models and environments to mimic real-world testing by using physics specifications such as gravity or optics via an onboard camera. The eight key Gazebo features include dynamics simulation, advanced 3D graphics, sensors, plugins, model database, socket-based communication, cloud simulation, and command-line tools. Like the previous package, this package allows customization by modifying the spawning location, the robot model, or the built world file. This versatility allows for a wealth of simulated test scenarios to be run.
-
-`gmapping` | allows autonomous navigation/ SLAM in the world
+`turtlebot_teleop` | This package enables manual navigation the robot through space. It will allow the `u i o j k l m , .` buttons on your keyboard to let you move. To go forward, backward, left, and right, hold down on the `i , j l` keys, respectively. The keys `u o m .` are diagonal movements NW, NE, SW, and SE, individually. Tap on `q w e` buttons to increase max, linear, or angular speed by 10%. Conversely, tap on `z x c` buttons to decrease max, linear, or angular speed by 10%. The `k` key will kill all motion, whereas the use of any other button not mentioned will smoothly stop motion. **Keys must be entered in the teleop terminal.** The `keyboard_teleop.launch` file will be used for this project. 
+`turtlebot_rviz_launchers` | This package opens the ROS Visualization (Rviz) application and allows you to visualize the project as a whole, covering perception, decision-making, and actuation. Initially, Rviz is blank. With the `turtlbot_rviz_launchers` package, the Global Options, Global Status, Robot Model, TF, Laser Scan, Bumper Hit, Grid, Map, Pose Array, Camera, Map, Global Map, Local Map, AMCL Particle Swarm, and Full Plan displays are set and mapped according to specifications in shell scripts or the original turtlebot launch files. Rviz works together with all the launch files and scanners to depict that a complete system works together when appropriately configured. The `view_navigation.launch` file will be used for this project. 
+`turtlebot_gazebo` | This package launches Gazebo and spawns the turtlebot in the Gazebo world file. Gazebo is a 3D simulator that allows the creation of multidimensional models and environments to mimic real-world testing by using physics specifications such as gravity or optics via an onboard camera. The eight key Gazebo features include dynamics simulation, advanced 3D graphics, sensors, plugins, model database, socket-based communication, cloud simulation, and command-line tools. Like the previous package, this package allows customization by modifying the spawning location, the robot model, or the built world file. This versatility allows for a wealth of simulated test scenarios to be run. The `turtlebot_world.launch` file will be used for this project. 
+`gmapping` | This package allows autonomous navigation. Through the utilization of lasers and RGB-D cameras, the robot can use Simultaneous Localization And Mapping (SLAM). With SLAM in process, the robot can then stitch together a map of the world. The `gmapping_demo.launch` file will be used for this project. 
 
 The syntax will be `rosdep -i install turtlebot_teleop`. Run `catkin_make` and `source devel/setup.bash` again, then begin making shell scripts that will allow multiple terminals to run simultaneously with various goals.
 
-_**Make sure to `unzip map.zip` in `/my_robot/maps/map.zip`.**_
+## _**Make sure to `unzip map.zip` in `/my_robot/maps/map.zip`.**_
 
+Create a shell script entitled `test_slam.sh` to launch the following: 
+- `turtlebot_world.launch`
+- `gmapping_demo.launch`
+- `view_navigation.launch`
+- `keyboard_teleop.launch`
+This will launch Gazebo and Rviz while utlizing SLAM to capture a map of the enviroment.
+
+Create a shell script entitled `test_navigation.sh` to launch the following: 
+- `turtlebot_world.launch`
+- `amcl_demo.launch`
+- `view_navigation.launch`
+This will launch Gazebo and Rviz while utlizing a particle filter to determine the robot trajectory when given goal destinations.
+
+Create a package entitled `pick_objects` with `move_base_msgs`, `actionlib`, and `roscpp` dependencies and a `pick_objects.cpp` node with two goal destinations. Then create a shell script entitled `pick_objects.sh` to launch the following: 
+- `turtlebot_world.launch`
+- `amcl_demo.launch`
+- `view_navigation.launch`
+- `pick_objects`
+This will launch Gazebo and Rviz with a particle filter to determine the best robot trajectory given the two goal destinations in `pick_objects.cpp`.
+
+Create a package entitled `add_markers` with `visualization_msgs` and `roscpp` dependencies and a `add_markers.cpp` node with two goal destinations. Then create a shell script entitled `add_markers.sh` to launch the following: 
+- `turtlebot_world.launch`
+- `amcl_demo.launch`
+- `view_navigation.launch`
+- `add_markers`
+This will launch Gazebo and Rviz with a particle filter for determining trajectory. However, this code will mainly focus on displaying a marker in Rviz before the robot reaches the goal 1 location, deleting the marker, then adding it again when it reaches the goal 2 destination in `add_markers.cpp`.
+
+Finally, create a shell script entitled `home_service.sh` to launch the following: 
+- `turtlebot_world.launch`
+- `amcl_demo.launch`
+- `view_navigation.launch`
+- `pick_objects`
+- `add_markers`
+This will launch Gazebo, Rviz, the particle filter, `pick_objects.cpp`, and `add_markers.cpp` for a enviroment that will display a marker at a goal 1 location, navigate the robot autonomously to the goal 1/ marker, hide the marker while picking it up, navigate to goal 2 location, and dropp off the marker making it visible again.
 
