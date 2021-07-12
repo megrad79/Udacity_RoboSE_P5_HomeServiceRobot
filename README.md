@@ -39,12 +39,14 @@ Create a shell script entitled `test_slam.sh` to launch the following:
 - `gmapping_demo.launch`
 - `view_navigation.launch`
 - `keyboard_teleop.launch`
+
 This will launch Gazebo and Rviz while utlizing SLAM to capture a map of the enviroment.
 
 Create a shell script entitled `test_navigation.sh` to launch the following: 
 - `turtlebot_world.launch`
 - `amcl_demo.launch`
 - `view_navigation.launch`
+
 This will launch Gazebo and Rviz while utlizing a particle filter to determine the robot trajectory when given goal destinations.
 
 Create a package entitled `pick_objects` with `move_base_msgs`, `actionlib`, and `roscpp` dependencies and a `pick_objects.cpp` node with two goal destinations. Then create a shell script entitled `pick_objects.sh` to launch the following: 
@@ -52,6 +54,7 @@ Create a package entitled `pick_objects` with `move_base_msgs`, `actionlib`, and
 - `amcl_demo.launch`
 - `view_navigation.launch`
 - `pick_objects`
+
 This will launch Gazebo and Rviz with a particle filter to determine the best robot trajectory given the two goal destinations in `pick_objects.cpp`.
 
 Create a package entitled `add_markers` with `visualization_msgs` and `roscpp` dependencies and a `add_markers.cpp` node with two goal destinations. Then create a shell script entitled `add_markers.sh` to launch the following: 
@@ -59,6 +62,7 @@ Create a package entitled `add_markers` with `visualization_msgs` and `roscpp` d
 - `amcl_demo.launch`
 - `view_navigation.launch`
 - `add_markers`
+
 This will launch Gazebo and Rviz with a particle filter for determining trajectory. However, this code will mainly focus on displaying a marker in Rviz before the robot reaches the goal 1 location, deleting the marker, then adding it again when it reaches the goal 2 destination in `add_markers.cpp`.
 
 Finally, create a shell script entitled `home_service.sh` to launch the following: 
@@ -67,5 +71,6 @@ Finally, create a shell script entitled `home_service.sh` to launch the followin
 - `view_navigation.launch`
 - `pick_objects`
 - `add_markers`
+
 This will launch Gazebo, Rviz, the particle filter, `pick_objects.cpp`, and `add_markers.cpp` for a enviroment that will display a marker at a goal 1 location, navigate the robot autonomously to the goal 1/ marker, hide the marker while picking it up, navigate to goal 2 location, and dropp off the marker making it visible again.
 
